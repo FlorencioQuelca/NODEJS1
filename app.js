@@ -1,5 +1,6 @@
 //?dependecias
 const express = require('express')
+    //import express from 'express'
     //?Initial configs
 const port = 9000
 const app = express()
@@ -45,6 +46,17 @@ app.post('/todo', (req, res) => {
         res.status(200).json(newTodo)
     } else {
         res.status(400).json({ message: "Invalid Data" })
+    }
+})
+
+
+app.get('/todo/:id', (req, res) => {
+    const id = req.params.id;
+    const todo = todoDB.find(item => item.id == id)
+    if (todo) {
+        res.status(200).json(todo)
+    } else {
+        res.status(404).json({ message: 'Invalid ID' })
     }
 })
 
